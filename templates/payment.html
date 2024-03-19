@@ -1,0 +1,34 @@
+{% extends "userbase.html" %}
+{% block content%}
+<html>
+    <body>
+        <form method="post" action="{% url 'paymentAction'%}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th class="text-primary" style="padding: 20px;" >Name on Card</th>
+                <td><input type="text" class="form-control" name="name_card"></td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Card Number</th>
+                <td><input type="number" class="form-control" name="card_number"></td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Expiry date</th>
+                <td><input type="text" class="form-control" name="exp_date" ></td>
+                <th class="text-primary" style="padding: 20px;">CVV</th>
+                <td><input type="number" class="form-control" name="cvv"></td>
+
+            </tr>
+            <tr>
+                {% for v in grand %}
+                <th></th>
+                <td><input type="submit" class="btn btn-outline-primary" value="pay {{v.Grandtotal}} now"></td>
+                <td><input type="hidden" name="order_id" value="{{v.id}}"></td>
+                {% endfor %}
+            </tr>
+        </table>
+    </form>
+    </body>
+</html>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "sellerbase.html" %}
+{% block content %}
+
+<html>
+    <body>
+        <table class="table table-bordered table-hover table-striped">
+            <tr>
+                <th class="text-center text-primary" >Id</th>
+                <th class="text-center text-primary" >Name</th>
+                <th class="text-center text-primary" >Address</th>
+                <th class="text-center text-primary ">Phone</th>
+                <th class="text-center text-primary" >View Order Details</th>
+            </tr>
+            {% for i in vieworder %}
+            <tr style="font-family: 'Times New Roman', Times, serif;">
+                <td>{{i.Order_Id.id}}</td>
+                <td>{{i.Order_Id.Name}}</td>
+                <td>{{i.Order_Id.Address}}</td>
+                <td>{{i.Order_Id.Phone}}</td>
+                <td><a href="{% url 'vieworderDetails' i.Order_Id.id %}"><b style="color: green;">Details</b></a></td>
+
+            </tr>
+            {% endfor %}
+        </table>
+        {% if messages%}
+        {% for msg in messages%}
+        <script>
+            alert("{{msg}}")
+        </script>
+        {% endfor %}
+        {% endif %}
+    </body>
+</html>
+{% endblock %}

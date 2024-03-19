@@ -1,0 +1,60 @@
+{% extends "sellerbase.html"  %}
+{% block content %}
+<html>
+    <body>
+        <table>
+            {% for i in order %}
+            <tr>
+                <th class=" text-primary p-3">Product Name</th>
+                <td style="padding: 20px; font-family:'Times New Roman', Times, serif" >{{i.Product_id.Name}}</td>
+            </tr>
+            <tr>
+                <th class=" text-primary p-3">Image</th>
+                <td><img src="{{i.Product_id.Image.url}}" class="image-thumbnail" height="200px" width="200px"></td>
+            </tr>
+            <tr>
+                <th class=" text-primary p-3">Price</th>
+                <td style="padding: 20px; font-family:'Times New Roman', Times, serif">{{i.Price}}</td>
+            </tr>
+            <tr>
+                <th class=" text-primary p-3">Quantity</th>
+                <td style="padding: 20px; font-family:'Times New Roman', Times, serif">{{i.Quantity}}</td>
+            </tr>
+            <tr>
+                <th class=" text-primary p-3">Order date</th>
+                <td style="padding: 20px; font-family:'Times New Roman', Times, serif">{{i.Order_Id.Orderdate}}</td>
+            </tr>
+            <tr>
+                <th class=" text-primary p-3">Order time</th>
+                <td style="padding: 20px; font-family:'Times New Roman', Times, serif">{{i.Order_Id.Ordertime}}</td>
+            </tr>
+            <tr>
+                <th class=" text-primary p-3">Grandtotal</th>
+                <td style="padding: 20px; font-family:'Times New Roman', Times, serif">{{i.Order_Id.Grandtotal}}</td>
+            </tr>  
+            <tr>
+                {% if i.Order_Id.Status == "approved" %}
+                <tr>
+                    <td><a href="{% url 'ordertracking' i.Order_Id.id %}"><b class="btn btn-primary">Track</b></a></td>
+                </tr>
+                {% endif %}
+                {% if i.Order_Id.Status == "pending" %}
+                <td><a href="{% url 'sellerapproval' i.Order_Id.id %}"><b class="btn btn-success" style="padding: 10px;">Approve</b></a></td>
+             
+           
+        
+            
+                <td><a href="{% url 'sellerrejection' i.Order_Id.id %}"><b class="btn btn-danger" style="padding: 10px;">Reject</b></a></td>
+            </tr>
+
+            {% endif %}
+            {% if i.Order_Id.Status == "reject"%}
+            <td><a href="{% url 'cancelorder' i.Order_Id.id%}"><b class="btn btn-outline-danger">Cancel Order</b></a></td>
+            {% endif %}
+            {% endfor %}
+        
+        </table>
+
+    </body>
+</html>
+{% endblock %}

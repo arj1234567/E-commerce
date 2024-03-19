@@ -1,0 +1,39 @@
+{% extends "adminbase.html"%}
+
+{% block content%}
+<html>
+    <head>
+        <link rel="stylesheet" href="static\css\bootstrap.css">
+        <script src="static\js\bootstrap.js"></script>
+    </head>
+    <body>
+    
+        <table class=" table-bordered table-striped ">
+            <tr style="background-color: rgb(148, 148, 240); color:black; text-align:center">
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Place</th>
+                <th>Phone</th>
+                <th>Username</th>
+                <th>Approval</th>
+                <th>Reject</th>
+            </tr>
+            {% for j in sell%}
+            <tr>
+                <td>{{j.Name}}</td>
+                <td>{{j.Gender}}</td>
+                <td>{{j.Age}}</td>
+                <td>{{j.Addresss}}</td>
+                <td>{{j.Place}}</td>
+                <td>{{j.Phone}}</td>
+                <td>{{j.username}}</td>
+                <td><a href="{% url 'approved' j.id %}">approved</a></td>
+                <td><a href="{% url 'rejected' j.id %}">rejected</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
+{% endblock %}

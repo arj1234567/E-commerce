@@ -1,0 +1,28 @@
+{% extends 'adminbase.html' %}
+
+
+
+{% block content %}
+
+
+<html>
+    <head>
+        <link rel="stylesheet" href="static\css\bootstrap.css">
+        <script src="static\js\bootstrap.js"></script>
+    </head>
+    <body>
+        <form method="post" action="{% url 'categoryAction'%}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th class="text-primary">Name</th>
+                <td><input type ="text" name="name" class="form-control" ></td>
+                <th></th>
+                <td><input type="submit" value="submit" class="btn btn-outline-primary"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+<html>
+    <body>
+        {% if messages%}
+        {% for msg in messages%}
+        <script>
+            alert("{{msg}}")
+        </script>
+        {% endfor %}
+        {% endif %}
+    </body>
+</html>

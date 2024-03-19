@@ -1,0 +1,21 @@
+{% extends "sellerbase.html" %}
+{% block content %}
+<html>
+    <body>
+        <h1>Hello</h1>
+        <li><a href="{%url 'viewprofileseller'%}">viewprofile</a></li>
+        <li><a href="{% url 'addproducts'%}">addproducts</a></li>
+        <li><a href="{% url 'viewproducts' %}">viewproducts</a></li>
+        <li><a href="{% url 'vieworders'%}">vieworders</a></li>
+        <li><a href="{% url 'sellerchangepassword'%}">Change password</a></li>
+        <li><a href="{% url 'logout' %}">Log Out</a></li>
+        {% if messages %}
+        {% for msg in messages %}
+        <script>
+            alert("{{msg}}")
+        </script>
+        {% endfor %}
+        {% endif %}
+    </body>
+</html>
+{% endblock %}

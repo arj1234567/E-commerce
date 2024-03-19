@@ -1,0 +1,15 @@
+{% extends "adminbase.html"%}
+
+{% block content%}
+<html>
+    <head>
+        <link rel="stylesheet" href="static\css\bootstrap.css">
+        <script src="static\js\bootstrap.js"></script>
+    </head>
+    <body class="text-primary">
+        {% for c in cat %}
+            {{c.name}}<br>
+        {% endfor %}
+    </body>
+</html>
+{% endblock %}

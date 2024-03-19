@@ -1,0 +1,62 @@
+{% extends "userbase.html"%}
+{% block content%}
+<html>
+    <head>
+        <link rel="stylesheet" href="static\css\bootstrap.css">
+        <script src="static\js\bootstrap.js"></script>
+    </head>
+    <body>
+        <form method="post" class="form-control" action="{% url 'editprofile'%}">
+        {% csrf_token %}
+        <table>
+           {% for i in prof %}
+           <input type ="hidden" class="form-control" name="id" value="{{i.id}}">
+           <tr>
+                <th class="text-primary" style="padding: 20px;">Name</th>
+                <td><input type = "text" class="form-control" name="name" value="{{i.Name}}"></td>
+          
+           </tr>
+           <tr>
+                <th class="text-primary" style="padding: 20px;">Gender</th>
+                <td>
+                    {% if i.Gender == female %}
+                    <input type ="radio" name="gender" value="female" checked="true" class="form-check-input">female
+                    <input type="radio" name="gender" value = "male" class="form-check-input">male
+                    {% else %}
+                    <input type ="radio" name="gender" value="male" checked="true" class="form-check-input">male
+                    <input type="radio" name="gender" value = "female" class="form-check-input">female
+                    {% endif %}
+                </td>
+
+           </tr>
+           <tr>
+            <th class="text-primary" style="padding: 20px;">Age</th>
+            <td><input type = "number" name="age" class="form-control" value="{{i.Age}}"></td>
+           </tr>
+           <tr>
+            <th class="text-primary" style="padding: 20px;">Address</th>
+            <td><textarea name="address"  cols="10" rows="5" class="form-control">{{i.Addresss}}</textarea></td>
+           </tr>
+           <tr>
+            <th class="text-primary" style="padding: 20px;">Place</th>
+            <td><input type = "text" name="place" class="form-control" value="{{i.Place}}"></td>
+           </tr>
+           <tr>
+            <th class="text-primary" style="padding: 20px;">Phone</th>
+            <td><input type = "number" name="phone" class="form-control" value="{{i.Phone}}"></td>
+           </tr>
+           <tr>
+            <th class="text-primary" style="padding: 20px;">Username</th>
+            <td><input type = "text" name="username" value="{{i.username}}" class="form-control"></td>
+           </tr>
+           <tr>
+            <td><input type ="submit" value = "submit" class="btn btn-outline-primary"></td>
+           </tr>
+           {% endfor %}
+        
+        </table>
+    </form>
+    </body>
+</html>
+{% endblock %}
+

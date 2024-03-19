@@ -1,0 +1,52 @@
+{% extends "userbase.html"%}
+{% block content%}
+<html>
+    <head>
+        <link rel="stylesheet" href="static\css\bootstrap.css">
+        <script src="static\js\bootstrap.js"></script>
+    </head>
+    <body> 
+        <form method="post" action="{% url 'product_search' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+               <td> <input type="text" name="search"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="search"></td>
+            </tr>
+        </table>
+        </form>
+        <table class="table-responsive" style="width:90%">
+            <thead class="text-primary" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Details</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Image</th>
+            </thead>
+            </tr>
+            {% for i in view_prod %}
+            <tr>
+                <td>{{i.Name}}</td>
+                <td>{{i.Price}}</td>
+                <td>{{i.Details}}</td>
+                <td>{{i.category_id.name}}</td>
+                <td>{{i.Stock}}</td>
+                <td><img src="{{i.Image.url}}" height="100px" width="150px"></td>
+                <td><a href="{% url 'add_to_cart' i.id %}">Add to cart</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+    {% if messages %}
+    {% for msg in messages%}
+    <script>
+        alert("{{msg}}")
+    </script>
+    {% endfor %}
+    {% endif %}
+</html>
+{% endblock %}

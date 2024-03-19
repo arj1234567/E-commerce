@@ -1,0 +1,21 @@
+{% extends "userbase.html"%}
+{% block content%}
+<html>
+    <body>
+        Hello welcome
+        <li><a href = "{% url 'viewprofile'%}">viewprofile</a></li>
+        <li><a href="{% url 'viewproductsbuyer'%}">viewproducts</a></li>
+        <li><a href="{% url 'mycarts'%}">My carts</a></li>
+        <li><a href="{% url 'myorders'%}">My orders</a></li>
+        <li><a href="{% url 'changepassword'%}">change password</a></li>
+        <li><a href="{% url 'logout'%}">Log out</a></li>
+    </body>
+    {% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+    </script>
+    {% endfor %}
+    {% endif %}
+</html>
+{% endblock %}

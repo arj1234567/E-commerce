@@ -1,0 +1,25 @@
+{% extends "sellerbase.html"%}
+{% block content%}
+<html>
+    <body>
+        <form method="post" action="{% url 'ordertrackingAction'%}">
+            {% csrf_token%}
+            {% for i in track %}
+            <table style="width: 50%;">
+                <tr>
+                    <td><input type="hidden" name="order_id" value="{{i.id}}"></td>
+                </tr>
+                <tr>
+                    <th class="text-center text-primary">Details</th>
+                    <td><textarea name="details" class="form-control p-3" cols="10" rows="5"></textarea></td>
+                </tr>
+                <tr>
+                    <th style="padding: 20px;"></th>
+                    <td><input type="submit" class="btn btn-outline-primary" value="track"></td>
+                </tr>
+            </table>
+            {% endfor %}
+        </form>
+    </body>
+</html>
+{% endblock %}

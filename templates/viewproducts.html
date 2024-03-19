@@ -1,0 +1,40 @@
+{% extends "sellerbase.html"%}
+{% block content %}
+<html>
+    <head>
+        <link rel="stylesheet" href="static\css\bootstrap.css">
+        <script src="static\js\bootstrap.js"></script>
+    </head>
+    <body>
+        <table style="width:90%">
+            {% if prod %}
+            <tr>
+                <th class="text-primary">Name</th>
+                <th class="text-primary">Price</th>
+                <th class="text-primary">Stock</th>
+                <th class="text-primary">Details</th>
+                <th class="text-primary">Category</th>
+                <th class="text-primary">Image</th>
+            </tr>
+            {% for k in prod %}
+            <tr>
+                <td style="font-family: Georgia, 'Times New Roman', Times, serif;">{{ k.Name }}</td>
+                <td style="font-family: Georgia, 'Times New Roman', Times, serif;">{{ k.Price }}</td>
+                <td style="font-family: Georgia, 'Times New Roman', Times, serif;">{{ k.Stock }}</td>
+                <td style="font-family: Georgia, 'Times New Roman', Times, serif;">{{ k.Details}}</td>
+                <td style="font-family: Georgia, 'Times New Roman', Times, serif;">{{ k.category_id.name}}</td>
+                <td><img src="{{k.Image.url}}" height="100px" width="150px"></td>
+                <td ><a href="{% url 'editproducts' k.id %}" class="btn btn-success">edit</a></td>
+                <td><a href="{% url 'deleteproducts' k.id %}" class="btn btn-danger">delete</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td>Please Add your Products....</td>
+            </tr>
+            {% endif %}
+        </table>
+    </body>
+</html>
+{% endblock %}
+

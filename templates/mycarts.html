@@ -1,0 +1,72 @@
+{% extends "userbase.html" %}
+{% block content %}
+<html>
+    <head>
+        <link rel="stylesheet" href="static\css\bootstrap.css">
+        <script src="static\js\bootstrap.js"></script>
+    </head>
+    <body>
+       
+        <table class=" table-group-divider">
+            <div class="container">
+            <form method="post" action="{% url 'orderAction' %}">
+                {% csrf_token %}
+            
+            {% for a in carts%}
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Name</th>
+                <td>{{a.Product_id.Name}}</td>
+            </tr>
+                <input type="hidden" name="product_id" value="{{a.Product_id.id}}">
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Image</th>
+                <td><img src="{{a.Product_id.Image.url}}" class="image-img-thumbnail" height="100px" width="150px"></td>
+
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Price</th>
+                <td>{{a.Product_id.Price}}</td>
+                <input type="hidden" name="price" value="{{a.Product_id.Price}}">
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Quantity</th>
+                <td>{{a.Quantity}}</td>
+                <input type="hidden" name="quantity" value="{{a.Quantity}}">
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Total</th>
+                <td>{{a.Total}}</td>
+            </tr>
+            <tr>
+                <td style="padding: 40px; font-weight:bolder"><a class="btn btn-outline-danger" href="{% url 'deletemycarts' a.id %}"><b style="color:rgb(10, 10, 10)">Delete</b></a></td>
+            </tr>
+        </div>
+            {% endfor %}
+                <tr>
+                    <th class="text-primary" style="padding: 20px;">Grand Total</th>
+                    <td><input type="text" class="form-control" name="grandtotal" value="{{sum}}" readonly="true"></td>
+                </tr>
+                <tr>
+                    <th class="text-primary" style="padding: 20px;">Name</th>
+                    <td><input type="text" class="form-control" name="name"></td>
+                    
+                </tr>
+                <tr>
+                    <th class="text-primary" style="padding: 20px;">Phone No</th>
+                    <td><input type="number" name="phone" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th class="text-primary" style="padding: 20px;">Address</th>
+                    <td><textarea name="address" cols="10" class="form-control " rows="5"></textarea></td>
+                </tr>
+                <tr style="padding: 20px;">
+                    <th></th>
+                    <td><input type="submit" class="btn btn-outline-primary" value="make my order"></td>
+                </tr>
+            </form>
+            
+        </table>
+       
+    </body>
+</html>
+{% endblock %}

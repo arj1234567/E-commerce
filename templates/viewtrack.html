@@ -1,0 +1,30 @@
+{% extends "userbase.html" %}
+{% block content %}
+<html>
+    <body>
+        <table class="table table-bordered table-hover table-striped">
+            {% if viewtrack %}
+            <tr class="text-center">
+                <th class="text-primary">Order Id</th>
+                <th class="text-primary">Details</th>
+                <th class="text-primary">Order Date</th>
+                <th class="text-primary">Order Time</th>
+            </tr>
+
+            {% for k in viewtrack %}
+            <tr style="font-family: 'Times New Roman', Times, serif;" class="text-center">
+                <td>{{k.Order_id.id}}</td>
+                <td>{{k.Details}}</td>
+                <td>{{k.Orderdate}}</td>
+                <td>{{k.Ordertime}}</td>
+            </tr> 
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td>Nothing to Display</td>
+            </tr>
+            {% endif %}
+        </table>
+    </body>
+</html>
+{% endblock %}

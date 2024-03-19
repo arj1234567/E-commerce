@@ -1,0 +1,61 @@
+{% extends "userbase.html"%}
+{% block content %}
+<html>
+    <body>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#quantity").change(function(){
+                    var quant = $("#quantity").val();
+                    var price = $("#price").val();
+                    var total = quant * price;
+                    $("#total").val(total);
+                })
+            })
+        </script>
+        <table>
+            <form method="post" action="{% url 'addtocartAction'  %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for j in cart %}
+            <tr>
+                <th></th>
+                <input type="hidden" name="product_id" class="form-control" value="{{j.id}}">
+                <td class="text-primary" style="font-weight: bolder;">{{j.id}}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <input type="hidden" name="name" class="form-control" value="{{j.Name}}">
+                <td class="text-primary" style="font-weight: bolder;">{{j.Name}}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <input type="hidden" class="form-control" name="stock" value="{{j.Stock}}">
+            </tr>
+            <tr>
+                <th></th>
+                <input type="hidden" class="form-control" name="image" value="{{j.Image.url}}">
+                <td class="image-thumbnail"><img src="{{j.Image.url}}" height="200px" width="200px"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <input type="hidden" name="price" value="{{j.Price}}" id="price">
+                <td style="font-weight: bolder;" class="text-primary">{{j.Price}}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td><input type="number" class="form-control" name="quantity" id="quantity"></td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <td><input type="number" class="form-control" name="total" id="total"></td>
+
+            </tr>
+            <tr>
+                <td><input type="submit" class="btn btn-outline-primary" value="add to cart"></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    </body>
+</html>
+{% endblock %}

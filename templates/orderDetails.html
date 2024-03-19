@@ -1,0 +1,47 @@
+{% extends "userbase.html" %}
+{% block content %}
+<html>
+    <body>
+        <table>
+            {% for i in details%}
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Product Name</th>
+                <td>{{i.Product_id.Name}}</td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Image</th>
+                <td><img src="{{i.Product_id.Image.url}}" class="image-thumbanil" height="200px" width="200px"></td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Price</th>
+                <td>{{i.Price}}</td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Quantity</th>
+                <td>{{i.Quantity}}</td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Order Date</th>
+                <td>{{i.Order_Id.Orderdate}}</td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Order time</th>
+                <td>{{i.Order_Id.Ordertime}}</td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Grandtotal</th>
+                <td>{{i.Order_Id.Grandtotal}}</td>
+            </tr>
+            <tr>
+                <td><a href="{% url 'buyercancelorder' i.Order_Id.id %}"><b class="btn btn-danger">Cancel Order</b></a></td>
+           
+            {% if i.Order_Id.Status == "approved" %}
+           
+                <td><a href="{% url 'viewtrack' i.Order_Id.id %}"><b class="btn btn-primary">viewtrack</b></a></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </body>
+</html>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "sellerbase.html" %}
+{% block content %}
+<html>
+    <body>
+        <table>
+            <form method="post" action="{% url 'editproductsAction' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for products in edit %}
+            <input type="hidden" name="id" class="form-control" value="{{products.id}}">
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Name</th>
+                <td><input type="text" name="name" class="form-control" value="{{products.Name}}"></td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Price</th>
+                <td><input type="number" name="price" class="form-control" value="{{products.Price}}"></td>
+
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Stock</th>
+                <td><input type="number" name="stock" class="form-control" value="{{products.Stock}}"></td>
+            </tr>
+            <tr>
+                <th class="text-primary" style="padding: 20px;">Details</th>
+                <td><input type="text" name="details" class="form-control" value="{{products.Details}}"></td>
+            </tr>
+           <tr>
+            <th class="text-primary" style="padding: 20px;">Category</th>
+            <td>
+            <select name="category" id="category" class="form-control">
+                <option value="{{products.category_id.id}}">{{products.category_id.name}}</option>
+                {% for j in cat %}
+                <option value="{{j.id}}">{{j.name}}</option>
+                {% endfor %}
+            </td>
+            </select>
+           </tr>
+           <tr>
+            <th class="text-primary" style="padding: 20px;">Image</th>
+            <td><img src="{{products.Image.url}}" class="image-fluid" height="200px" width="200px" style="padding-bottom: 20px;"></td>
+            <td><input type="file" name="image" class="form-control" value="{{products.Image.url}}" ></td>
+           </tr>
+            <th></th>
+            <td><input type="submit" value="update" class="btn btn-outline-primary"></td>
+            {% endfor %}
+        </form>
+        </table>
+    </body>
+</html>
+{% endblock %}
